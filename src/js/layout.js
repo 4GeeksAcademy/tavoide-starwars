@@ -8,6 +8,10 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import {Home} from "./views/Home.jsx";
 
+import DetailPlanet from "./views/DetailPlanet.jsx";
+import DetailPeople from "./views/DetailPeople.jsx";
+
+
 
 //create your first component
 const Layout = () => {
@@ -16,14 +20,17 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div>
+		<div className="bg-black">
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Navbar />
 					<Routes>
 						<Route path="/" element={<Home />} />
 						
+						<Route path="/detailPlanet" element={<DetailPlanet />} />
+						<Route path="/detailPeople" element={<DetailPeople />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
+
 					</Routes>
 				</ScrollToTop>
 			</BrowserRouter>
