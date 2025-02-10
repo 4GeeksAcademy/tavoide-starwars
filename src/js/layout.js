@@ -10,6 +10,7 @@ import {Home} from "./views/Home.jsx";
 
 import DetailPlanet from "./views/DetailPlanet.jsx";
 import DetailPeople from "./views/DetailPeople.jsx";
+import DetailStarships from "./views/DetailStarships.jsx";
 
 
 
@@ -29,6 +30,7 @@ const Layout = () => {
 						
 						<Route path="/detailPlanet" element={<DetailPlanet />} />
 						<Route path="/detailPeople" element={<DetailPeople />} />
+						<Route path="/detailStarship" element={<DetailStarships />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 
 					</Routes>

@@ -4,9 +4,10 @@ const getState = ({ getStore, getActions, setStore }) => ({
 		detailPlanet: [],
 		peoples: [],
 		detailPeople: [],
-		starhsips:[],
-		detailStarhsips:[],
+		starships:[],
+		detailStarships:[],
 		currentFav: [],
+		favorites:[],
 	},
 	actions: {
 		fetchPlanets: async () => {
@@ -74,29 +75,47 @@ const getState = ({ getStore, getActions, setStore }) => ({
 
 		fetchStarships: async () => {
 			try{
-			fetch("https://www.swapi.tech/api/starhsips")
+			fetch("https://www.swapi.tech/api/starships")
 				.then(res => res.json())
-				.then(data => setStore({ ...getStore(), peoples: data.results }))
+				.then(data => setStore({ ...getStore(), starships: data.results }))
 				.catch(err => console.error(err));
-				console.log("estos es el store", store.peoples);
+				console.log("estos es el store", store.starships);
 		}
 			catch (error) {
 				console.error(error);
 			}
 		},
 
+		getDetailStarships: async (id) => {
+			try {
+				const response = await fetch(`https://www.swapi.tech/api/starships/${id}`);
+				if (!response.ok) {
+					throw new Error("No sirvió");
+				}
+				const data = await response.json();
+				console.log("esta es la otra data de starship", data);
 
-		// toggleFavorite: (planet) => {
-		// 	const store = getStore();
-		// 	const isFavorite = store.currentFav.some(fav => fav.uid === planet.uid);
+				const store = getStore();
+				setStore({ ...store, starshipProperties: data.result });
+				console.log(data);
 
-		// 	setStore({
-		// 		...store,
-		// 		currentFav: isFavorite
-		// 			? store.currentFav.filter(fav => fav.uid !== planet.uid)
-		// 			: [...store.currentFav, planet]
-		// 	});
-		// }
+			} catch (error) {
+				console.error(error);
+			}
+		},
+
+		addToFavorites: (item) => {
+			const store = getStore();
+			const exists = store.favorites.some((fav) => fav.uid === item.uid);
+			if (!exists) {
+				setStore({ favorites: [...store.favorites, item] });
+			}
+		},
+		removeFromFavorites: (uid) => {
+			const store = getStore();
+			const updatedFavorites = store.favorites.filter((fav) => fav.uid !== uid);
+			setStore({ favorites: updatedFavorites });
+		},
 	}
 });
 

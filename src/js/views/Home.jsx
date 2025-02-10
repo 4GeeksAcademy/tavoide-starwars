@@ -3,6 +3,7 @@ import Planets from '../component/Planets.jsx'
 import { Context } from '../store/appContext'
 import { Link } from 'react-router-dom'
 import People from '../component/People.jsx'
+import Starships from '../component/Starships.jsx'
 
 
 
@@ -19,6 +20,7 @@ import People from '../component/People.jsx'
       <h1>
         <People/>
       </h1>
+      <h2> <Starships /> </h2>
     </div>
   )
 }

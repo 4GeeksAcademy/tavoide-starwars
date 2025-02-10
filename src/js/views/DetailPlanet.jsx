@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { RuntimeGlobals } from 'webpack';
+
 
 
 const DetailPlanet = () => {
@@ -21,7 +21,7 @@ const DetailPlanet = () => {
 
     return (
         <div className="container mb-1" style={{ marginTop: '80px' }}>
-            <h1 className="text-center" >{store.planetProperties.properties.name || "Details"}</h1>
+            <h1 className="text-center " >{store.planetProperties.properties.name || "Details"}</h1>
             <div className="card mx-auto" style={{ width: "600px" }}>
                 <img
                     src={`https://starwars-visualguide.com//assets/img/planets/${store.planetProperties.uid}.jpg`}

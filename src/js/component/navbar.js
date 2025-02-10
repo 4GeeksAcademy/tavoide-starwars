@@ -15,39 +15,44 @@ export const Navbar = () => {
   };
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-secondary ">
-            <div className="container-fluid">
-                <a className="navbar-brand" href="#" onClick={goToAboutPage}><h2>STAR WARS</h2></a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                   
-                    <div className="ms-auto dropdown">
-                        <button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            Favoritos <span className="badge bg-secondary">{store.currentFav.length}</span>
-                        </button>
-                        <ul className="dropdown-menu">
-                            {store.currentFav.length > 0 ? (
-                                store.currentFav.map((item, index) => (
-                                    <li key={index} className="d-flex justify-content-between px-3">
-                                        <span>{item}</span>
-                                        <button 
-                                            className="btn btn-sm btn-danger"
-                                            onClick={() => actions.toggleFavorite(planet)}
-                                        >
-                                            ❌
-                                        </button>
-                                    </li>
-                                ))
-                            ) : (
-                                <li><span className="dropdown-item text-muted">No hay favoritos</span></li>
-                            )}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        <div >
+			<nav className="navbar mb-3 text-center fixed-top " style={{
+				background: 'black', height: '60px'
+			}}>
+				<Link to="/">
+					<img src="https://framerusercontent.com/images/HVzApGKkH6YM1vUO9zOo5lJBC4.jpeg" className="ms-3" style={{ height: "50px", width: "90px" }} />
+				</Link>
+				<div className="dropdown me-3">
+					<button
+						className="btn btn-warning dropdown-toggle text-dark"
+						type="button"
+						data-bs-toggle="dropdown"
+						aria-expanded="false">
+						Your force
+						<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+							{store.favorites.length}
+						</span>
+					</button>
+					<ul className="dropdown-menu dropdown-menu-end" aria-labelledby="favoritesDropdown">
+
+						{store.favorites.length === 0 ? (
+							<li className="dropdown-item text-dark">No hay favoritos</li>
+						) : (
+							store.favorites.map((fav) => (
+								<li key={fav.uid} className="dropdown-item d-flex justify-content-between align-items-center">
+									<span>{fav.name}</span>
+									<button
+										className="btn btn-sm btn-danger ms-2"
+										onClick={() => actions.removeFromFavorites(fav.uid)}
+									> X </button>
+								</li>
+							))
+						)}
+					</ul>
+				</div>
+			</nav>
+
+		</div >
     );
 };
 
